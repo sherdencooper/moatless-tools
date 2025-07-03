@@ -32,21 +32,21 @@ run: ## Start all services with docker-compose
 	fi; \
 	$(eval DETECTED_ARCH := $(shell uname -m | sed 's/x86_64/amd64/')) \
 	echo "Starting all services for $(DETECTED_ARCH) with environment: ${ENV_FILE}..."; \
-	DOCKER_DEFAULT_PLATFORM=linux/$(DETECTED_ARCH) docker-compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) up -d
+	DOCKER_DEFAULT_PLATFORM=linux/$(DETECTED_ARCH) docker compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) up -d
 
 stop: ## Stop all services
 	echo "Stopping services..."; \
-	docker-compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) down
+	docker compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) down
 
 restart-api: ## Restart only the API service
 	echo "Restarting API service with environment: ${ENV_FILE}..."; \
-	docker-compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) restart api
+	docker compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) restart api
 
 logs: ## Show logs from all services
-	docker-compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) logs -f
+	docker compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) logs -f
 
 status: ## Show status of all services
-	docker-compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) ps
+	docker compose --env-file ${ENV_FILE} -f $(COMPOSE_FILE) ps
 
 
 build-api: ## Build API Docker image only
